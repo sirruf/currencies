@@ -1,0 +1,15 @@
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'config/environments/**/*'
+    - 'config/initializers/**/*'
+    - 'config/application.rb'
+    - 'config/boot.rb'
+    - 'config/environment.rb'
+    - 'config/puma.rb'
+    - 'config/spring.rb'
+    - 'script/**/*'
+    - '**/Gemfile'
+    - '**/Rakefile'
+    - '**/config.ru'
