@@ -13,7 +13,7 @@
   <tbody>
   <% @calculations.each do |calculation| %>
     <tr>
-      <th scope="row"><%= calculation.id %></th>
+      <th scope="row"><span class="badge badge-secondary"><%= calculation.id %></span></th>
       <td><span class="badge badge-primary"><%= l calculation.created_at, format: :short %></span></td>
       <td>
         <span class="badge badge-secondary"><%= calculation.base_currency %> <%= calculation.amount %></span>
@@ -31,7 +31,6 @@
         <div class="btn-group" role="group" aria-label="Actions">
           <%= link_to fa_icon("bar-chart"), calculation_path(calculation), class: 'btn btn-light btn-sm' %>
           <%= link_to fa_icon("edit"), edit_calculation_path(calculation), class: 'btn btn-light btn-sm' %>
-          <%= link_to fa_icon("trash"), edit_calculation_path(calculation), class: 'btn btn-danger btn-sm' %>
         </div>
       </td>
     </tr>

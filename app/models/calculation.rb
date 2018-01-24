@@ -17,6 +17,10 @@ class Calculation < ApplicationRecord
     Reports::CalculationRate.new(self).rates
   end
 
+  def rates_chart
+    Reports::CalculationRate.new(self).chart
+  end
+
   private
 
   def update_rates

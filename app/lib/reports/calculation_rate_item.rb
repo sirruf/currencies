@@ -5,10 +5,10 @@ module Reports
   # Calculation Report Item
   #
   class CalculationRateItem
-    attr_reader :date, :value, :amount
+    attr_reader :date, :value, :amount, :max_value, :min_value
 
     def self.from_calculation(rate)
-      items = []
+      items = [new(rate, rate.calculation.created_at)]
       rate.calculation.rates_data.each_key do |d|
         date = Date.parse(d)
         items << new(rate, date)
@@ -20,10 +20,10 @@ module Reports
       @rate = rate
       @date = date
       @amount = rate.calculation.amount || 0
-      @rate_on_create = rate.calculation.rate_on_create || 0
-      @value = rate.calculation.rates_data[date.to_s] || 0
-      @max =  rate.max_value == [date, @value]
-      @max =  rate.min_value == [date, @value]
+      @rate_on_create = rate.calculation.rate_on_create || 1
+      @value = rate.calculation.rates_data[date.to_s] || @rate_on_create
+      @max_value = rate.max_value[1] == @value
+      @min_value = rate.min_value[1] == @value
     end
 
     def year
@@ -31,7 +31,7 @@ module Reports
     end
 
     def week
-      @date.cweek
+      @date.to_date.cweek
     end
 
     def in_past?
@@ -43,7 +43,7 @@ module Reports
     end
 
     def profit
-      ((@amount * @rate_on_create) - sum).round(4)
+      (sum - (@amount * @rate_on_create)).round(4)
     end
   end
 end

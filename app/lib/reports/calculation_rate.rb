@@ -24,5 +24,28 @@ module Reports
     def rates
       CalculationRateItem.from_calculation(self)
     end
+
+    def chart
+      build_chart_data([
+                         line('Profit', :profit),
+                         # line('Sum', :sum),
+                         line('Rate', :value)
+                       ])
+    end
+
+    # private
+
+    def build_chart_data(lines = [])
+      rates.each do |item|
+        lines.each do |line|
+          line[:line_hash][:data][item.date.to_s] = item.send(line[:method])
+        end
+      end
+      lines.map { |l| l[:line_hash] }
+    end
+
+    def line(name, method)
+      { line_hash: { name: name, data: {} }, method: method }
+    end
   end
 end

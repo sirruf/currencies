@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en"><head>
+<html lang="en">
+<head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
@@ -8,6 +9,7 @@
   <title>Currencies</title>
 
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
+  <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
   <%= csrf_meta_tags %>
 
@@ -18,12 +20,14 @@
 <%= render 'layouts/navigation' %>
 
 <div class="container">
-    <% flash.each do |name, msg| %>
-      <%= content_tag(:div, msg, class: "alert alert-info") %>
-    <% end %>
-    <%= yield %>
+  <nav aria-label="breadcrumb">
+      <%= render_breadcrumbs :builder => ::BootstrapBreadcrumbsBuilder, tag: :li, separator: "" %>
+  </nav>
+  <% flash.each do |name, msg| %>
+    <%= content_tag(:div, msg, class: "alert alert-info") %>
+  <% end %>
+  <%= yield %>
 </div>
-
 </body>
 </html>
 

@@ -22,12 +22,12 @@ module Fixer
       @rates_values = get_rates(past_dates, future_dates)
     end
 
-    def get_rates(past_dates, future_dates)
+    def get_rates(past_dates, future_dates, with_past = false)
       all_rates = {}
       past_dates.each_with_index do |date, index|
         value = API.value_for_date(@base, @target, date)
         unless value.nil?
-          all_rates[date.to_s] = value
+          all_rates[date.to_s] = value if with_past
           all_rates[future_dates[future_dates.size - index - 1].to_s] = value
         end
       end

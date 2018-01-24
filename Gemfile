@@ -32,9 +32,11 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+gem 'jquery-rails'
 gem 'bootstrap', '~> 4.0.0'
 gem 'font-awesome-rails'
+gem 'breadcrumbs_on_rails'
+gem 'chartkick'
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
