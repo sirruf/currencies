@@ -1,5 +1,6 @@
 AllCops:
   Exclude:
+  # Checking for default files is disabled.
     - 'bin/**/*'
     - 'db/**/*'
     - 'config/environments/**/*'

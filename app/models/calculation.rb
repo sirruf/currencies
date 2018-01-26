@@ -11,7 +11,9 @@ class Calculation < ApplicationRecord
   validates :max_weeks, numericality: { only_integer: true }
   validates :base_currency, :target_currency,
             inclusion: { in: Fixer::API::ALLOWED_CURRENCIES }
-  before_save :update_rates
+  attr_accessor :updating_by_job
+
+  after_commit :update_rates
 
   def rates_report
     Reports::CalculationRate.new(self).rates
@@ -24,12 +26,6 @@ class Calculation < ApplicationRecord
   private
 
   def update_rates
-    remote_currency = Fixer::Currency.new(target_currency, base: base_currency)
-    self.rate_on_create = Fixer::API.value_for_date(base_currency,
-                                                    target_currency,
-                                                    Date.today)
-    self.rates_data = remote_currency.rates(max_weeks)
-  rescue StandardError => e
-    errors.add(rates_data: e)
+    CurrenciesUpdateJob.perform_later(id) unless updating_by_job
   end
 end

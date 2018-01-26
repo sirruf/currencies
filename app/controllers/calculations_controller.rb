@@ -17,9 +17,7 @@ class CalculationsController < ApplicationController
     add_breadcrumb @calculation.id, nil
   end
 
-  def edit
-    @calculation
-  end
+  def edit; end
 
   private
 

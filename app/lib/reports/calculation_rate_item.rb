@@ -20,10 +20,7 @@ module Reports
       @rate = rate
       @date = date
       @amount = rate.calculation.amount || 0
-      @rate_on_create = rate.calculation.rate_on_create || 1
-      @value = rate.calculation.rates_data[date.to_s] || @rate_on_create
-      @max_value = rate.max_value[1] == @value
-      @min_value = rate.min_value[1] == @value
+      set_values(date, rate)
     end
 
     def year
@@ -44,6 +41,15 @@ module Reports
 
     def profit
       (sum - (@amount * @rate_on_create)).round(4)
+    end
+
+    private
+
+    def set_values(date, rate)
+      @rate_on_create = rate.calculation.rate_on_create || 1
+      @value = rate.calculation.rates_data[date.to_s] || @rate_on_create
+      @max_value = rate.max_value[1] == @value
+      @min_value = rate.min_value[1] == @value
     end
   end
 end
