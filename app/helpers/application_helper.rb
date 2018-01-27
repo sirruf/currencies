@@ -42,6 +42,10 @@ module ApplicationHelper
     nil
   end
 
+  def active?(controller)
+    'active' if controller == controller_name.to_sym
+  end
+
   private
 
   def get_concat(message)

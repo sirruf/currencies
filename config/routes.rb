@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root 'calculations#index'
+  devise_for :users
+  root 'static_pages#home'
   resources :calculations
 end

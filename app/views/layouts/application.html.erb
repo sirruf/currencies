@@ -18,14 +18,13 @@
 <body>
 
 <%= render 'layouts/navigation' %>
-
 <div class="container">
-  <nav aria-label="breadcrumb">
-      <%= render_breadcrumbs :builder => ::BootstrapBreadcrumbsBuilder, tag: :li, separator: "" %>
-  </nav>
-  <%# flash.each do |name, msg| %>
-    <%#= content_tag(:div, msg, class: "alert alert-info") %>
-  <%# end %>
+  <% unless !breadcrumbs.present? %>
+    <nav aria-label="breadcrumb">
+        <%= render_breadcrumbs :builder => ::BootstrapBreadcrumbsBuilder, tag: :li, separator: "" %>
+    </nav>
+  <% end %>
+
   <%= flash_messages %>
   <%= yield %>
   <footer class="footer" style="padding-top: 20px;">

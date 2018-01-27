@@ -5,12 +5,13 @@
 #
 class CalculationsController < ApplicationController
   before_action :set_calculation, only: %i[show edit update destroy]
+  before_action :authenticate_user!
 
   add_breadcrumb 'Home', :root_path
   add_breadcrumb 'Calculations', :calculations_path
 
   def index
-    @calculations = Calculation.all
+    @calculations = current_user.calculations
   end
 
   def show
@@ -27,6 +28,7 @@ class CalculationsController < ApplicationController
   def create
     add_breadcrumb 'New', nil
     @calculation = Calculation.new(calculation_params)
+    @calculation.user = current_user
     if @calculation.save
       redirect_to calculations_path(@calculation),
                   notice: 'Calculation was successfully created.'
@@ -59,7 +61,7 @@ class CalculationsController < ApplicationController
   private
 
   def set_calculation
-    @calculation = Calculation.find(params[:id])
+    @calculation = current_user.calculations.find(params[:id])
   end
 
   def calculation_params

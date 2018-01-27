@@ -22,6 +22,8 @@ class Calculation < ApplicationRecord
 
   after_commit :update_rates
 
+  belongs_to :user
+
   def data_ready?
     rates_data.present?
   end

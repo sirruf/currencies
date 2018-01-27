@@ -1,10 +1,23 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary" >
-  <a class="navbar-brand" href="#">Currencies</a>
+  <%= link_to 'Currencies', root_path, class: 'navbar-brand' %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarCollapse">
-    <ul class="navbar-nav mr-auto">
-    </ul>
+    <% if current_user.present? %>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item <%= active?(:calculations) %>">
+          <%= link_to 'Calculations', calculations_path, class: 'nav-link' %>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="navbar-item">
+          <%= link_to(destroy_user_session_path, method: :delete, class: 'nav-link')  do %>
+            <i class="fa fa-sign-out"></i> Sign Out
+          <% end %>
+        </li>
+      </ul>
+    <% end %>
+
   </div>
 </nav>
