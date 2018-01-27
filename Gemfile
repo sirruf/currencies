@@ -39,6 +39,7 @@ gem 'bootstrap', '~> 4.0.0'
 gem 'font-awesome-rails'
 gem 'breadcrumbs_on_rails'
 gem 'chartkick'
+gem 'bootstrap_form', git: 'https://github.com/bootstrap-ruby/bootstrap_form.git', branch: 'master'
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'

@@ -2,53 +2,89 @@
   <div class="col-lg-12">
     <div class="card">
       <div class="card-header">
-        Graph
+        Calculation info
       </div>
       <div class="card-body">
-        <%= line_chart @calculation.rates_chart %>
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Created at
+            <span class="badge badge-light badge-pill"><%= l @calculation.created_at, format: :short %></span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Base currency
+            <span class="badge badge-light badge-pill"><%= @calculation.base_currency %></span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Target currency
+            <span class="badge badge-light badge-pill"><%= @calculation.target_currency %></span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Amount
+            <span class="badge badge-light badge-pill"><%= @calculation.amount %></span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Max wait weeks
+            <span class="badge badge-light badge-pill"><%= @calculation.max_weeks %></span>
+          </li>
+        </ul>
       </div>
     </div>
 
   </div>
 </div>
-<div class="row" style="padding-top: 10px">
-  <div class="col-lg-12">
-    <div class="card">
-      <div class="card-header">
-        Statistic
-      </div>
+
+<% if @calculation.data_ready? %>
+  <div class="row" style="padding-top: 10px">
+    <div class="col-lg-12">
       <div class="card">
+        <div class="card-header">
+          Graph
+        </div>
         <div class="card-body">
-          <table class="table table-hover text-center">
-            <thead>
-            <tr>
-              <th scope="col">Year / Week</th>
-              <th scope="col">Rate</th>
-              <th scope="col">Sum</th>
-              <th scope="col">Rate</th>
-              <th scope="col">Profit/Loss</th>
-              <th scope="col">Rank</th>
-            </tr>
-            </thead>
-            <tbody>
-            <% @calculation.rates_report.each do |report_item| %>
-              <tr class="<%= row_color report_item %>">
-                <th scope="row"><%= report_item.year %> / <%= report_item.week %> (<%= l report_item.date.to_date, format: :short %>)</th>
-                <th scope="row"><%= report_item.value %></th>
-                <th scope="row"><%= report_item.sum %></th>
-                <td><%= l report_item.date.to_date, format: :short %></td>
-                <td><%= report_item.profit %></td>
-                <td><%= rank report_item %></td>
-              </tr>
-            <% end %>
-            </tbody>
-          </table>
+          <%= line_chart @calculation.rates_chart %>
         </div>
       </div>
     </div>
-
   </div>
-</div>
+  <div class="row" style="padding-top: 10px">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          Statistic
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <table class="table table-hover text-center">
+              <thead>
+              <tr>
+                <th scope="col">Year / Week</th>
+                <th scope="col">Rate</th>
+                <th scope="col">Sum</th>
+                <th scope="col">Rate</th>
+                <th scope="col">Profit/Loss</th>
+                <th scope="col">Rank</th>
+              </tr>
+              </thead>
+              <tbody>
+              <% @calculation.rates_report.each do |report_item| %>
+                <tr class="<%= row_color report_item %>">
+                  <th scope="row"><%= report_item.year %> / <%= report_item.week %> (<%= l report_item.date.to_date, format: :short %>)</th>
+                  <th scope="row"><%= report_item.value %></th>
+                  <th scope="row"><%= report_item.sum %></th>
+                  <td><%= l report_item.date.to_date, format: :short %></td>
+                  <td><%= report_item.profit %></td>
+                  <td><%= rank report_item %></td>
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
 
 
 

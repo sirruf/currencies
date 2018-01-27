@@ -8,12 +8,21 @@ class Calculation < ApplicationRecord
             :target_currency,
             :amount,
             :max_weeks, presence: true
-  validates :max_weeks, numericality: { only_integer: true }
+  validates :amount, numericality: { only_integer: true,
+                                     greater_than_or_equal_to: 1,
+                                     less_than_or_equal_to: 100_000 }
+  validates :max_weeks, numericality: { only_integer: true,
+                                        greater_than_or_equal_to: 1,
+                                        less_than_or_equal_to: 10 }
   validates :base_currency, :target_currency,
             inclusion: { in: Fixer::API::ALLOWED_CURRENCIES }
   attr_accessor :updating_by_job
 
   after_commit :update_rates
+
+  def data_ready?
+    rates_data.present?
+  end
 
   def rates_report
     Reports::CalculationRate.new(self).rates

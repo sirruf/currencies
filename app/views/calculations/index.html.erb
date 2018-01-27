@@ -1,39 +1,54 @@
-<table class="table table-striped text-center">
-  <thead>
-  <tr class="text-uppercase">
-    <th scope="col">#</th>
-    <th scope="col">Created at</th>
-    <th scope="col">Base</th>
-    <th scope="col">Target</th>
-    <th scope="col">Weeks</th>
-    <th scope="col">Amount</th>
-    <th scope="col"></th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @calculations.each do |calculation| %>
-    <tr>
-      <th scope="row"><span class="badge badge-secondary"><%= calculation.id %></span></th>
-      <td><span class="badge badge-primary"><%= l calculation.created_at, format: :short %></span></td>
-      <td>
-        <span class="badge badge-secondary"><%= calculation.base_currency %> <%= calculation.amount %></span>
-      </td>
-      <td>
-        <span class="badge badge-secondary"><%= calculation.target_currency %></span>
-      </td>
-      <td>
-        <span class="badge badge-success"><%= calculation.max_weeks %></span>
-      </td>
-      <td>
-        <span class="badge badge-success"><%= calculation.amount %></span>
-      </td>
-      <td>
-        <div class="btn-group" role="group" aria-label="Actions">
-          <%= link_to fa_icon("bar-chart"), calculation_path(calculation), class: 'btn btn-light btn-sm' %>
-          <%= link_to fa_icon("edit"), edit_calculation_path(calculation), class: 'btn btn-light btn-sm' %>
-        </div>
-      </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        Calculations
+        <span class="pull-right"><%= link_to fa_icon('plus'), new_calculation_path, class: 'btn btn-outline-primary' %></span>
+      </div>
+      <div class="card-body">
+        <table class="table table-striped text-center">
+          <thead>
+          <tr class="text-uppercase">
+            <th scope="col">#</th>
+            <th scope="col">Created at</th>
+            <th scope="col">Base</th>
+            <th scope="col">Target</th>
+            <th scope="col">Weeks</th>
+            <th scope="col">Amount</th>
+            <th scope="col"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @calculations.each do |calculation| %>
+            <tr>
+              <th scope="row"><span class="badge badge-secondary"><%= calculation.id %></span></th>
+              <td><span class="badge badge-primary"><%= l calculation.created_at, format: :short %></span></td>
+              <td>
+                <span class="badge badge-secondary"><%= calculation.base_currency %> <%= calculation.amount %></span>
+              </td>
+              <td>
+                <span class="badge badge-secondary"><%= calculation.target_currency %></span>
+              </td>
+              <td>
+                <span class="badge badge-success"><%= calculation.max_weeks %></span>
+              </td>
+              <td>
+                <span class="badge badge-success"><%= calculation.amount %></span>
+              </td>
+              <td>
+                <div class="btn-group" role="group" aria-label="Actions">
+                  <%= link_to fa_icon("bar-chart"), calculation_path(calculation), class: 'btn btn-light btn-sm' %>
+                  <%= link_to fa_icon("edit"), edit_calculation_path(calculation), class: 'btn btn-light btn-sm' %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+

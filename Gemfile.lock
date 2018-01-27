@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/bootstrap-ruby/bootstrap_form.git
+  revision: cdbd964ed05114090eb5c37180fae7afb9f16592
+  branch: master
+  specs:
+    bootstrap_form (4.0.0.dev)
+      rails (>= 5.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -235,6 +243,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap (~> 4.0.0)
+  bootstrap_form!
   breadcrumbs_on_rails
   byebug
   chartkick
