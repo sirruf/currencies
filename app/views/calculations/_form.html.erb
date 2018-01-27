@@ -1,8 +1,8 @@
 <%= bootstrap_form_for(@calculation, layout: :horizontal) do |f| %>
-  <%= f.select :base_currency, Fixer::API::ALLOWED_CURRENCIES, label: 'Base currency', control_col: 'col-sm-2', selected: 'EUR' %>
+  <%= f.select :base_currency, Fixer::API::ALLOWED_CURRENCIES, label: 'Base currency', control_col: 'col-sm-2', selected: f.object.base_currency || 'EUR' %>
   <%= f.select :target_currency, Fixer::API::ALLOWED_CURRENCIES, label: 'Target currency', control_col: 'col-sm-2' %>
   <%= f.text_field :amount, label: 'Anount', control_col: 'col-sm-2' %>
-  <%= f.text_field :max_weeks, label: 'Max waiting time', control_col: 'col-sm-2' %>
+  <%= f.text_field :max_weeks, label: 'Max waiting time (weeks)', control_col: 'col-sm-2' %>
   <hr />
   <%= f.submit "Save", class: 'btn btn-primary' %>
 <% end %>
