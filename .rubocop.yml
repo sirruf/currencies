@@ -1,6 +1,6 @@
 AllCops:
   Exclude:
-  # Checking for default files is disabled.
+  # Default Rails files ignored.
     - 'bin/**/*'
     - 'db/**/*'
     - 'config/environments/**/*'

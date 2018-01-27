@@ -16,7 +16,7 @@ class CalculationsController < ApplicationController
   def show
     add_breadcrumb @calculation.id, nil
     error = 'Rates are updating. Please, reload this page in minutes.'
-    flash[:error] = error unless @calculation.data_ready?
+    flash[:alert] = error unless @calculation.data_ready?
   end
 
   def new
@@ -28,7 +28,7 @@ class CalculationsController < ApplicationController
     add_breadcrumb 'New', nil
     @calculation = Calculation.new(calculation_params)
     if @calculation.save
-      redirect_to calculation_path(@calculation),
+      redirect_to calculations_path(@calculation),
                   notice: 'Calculation was successfully created.'
     else
       render action: 'new'
@@ -49,6 +49,11 @@ class CalculationsController < ApplicationController
     else
       render action: 'edit'
     end
+  end
+
+  def destroy
+    @calculation.destroy
+    redirect_to calculations_path
   end
 
   private

@@ -29,6 +29,17 @@
         </ul>
       </div>
     </div>
+    <div class="card-footer text-right">
+      <div class="btn-group" role="group" aria-label="Actions">
+        <%= link_to edit_calculation_path(@calculation), class: 'btn btn-outline-primary' do %>
+          <%= fa_icon("edit") %> Edit
+        <% end %>
+        <%= link_to calculation_path(@calculation), class: 'btn btn-outline-danger',
+                    method: :delete, data: { confirm: "Are you sure?" } do %>
+        <%= fa_icon("trash") %> Delete
+        <% end %>
+      </div>
+    </div>
 
   </div>
 </div>
@@ -68,7 +79,9 @@
               <tbody>
               <% @calculation.rates_report.each do |report_item| %>
                 <tr class="<%= row_color report_item %>">
-                  <th scope="row"><%= report_item.year %> / <%= report_item.week %> (<%= l report_item.date.to_date, format: :short %>)</th>
+                  <th scope="row"><%= report_item.year %> / <%= report_item.week %>
+                    (<%= l report_item.date.to_date, format: :short %>)
+                  </th>
                   <th scope="row"><%= report_item.value %></th>
                   <th scope="row"><%= report_item.sum %></th>
                   <td><%= l report_item.date.to_date, format: :short %></td>
