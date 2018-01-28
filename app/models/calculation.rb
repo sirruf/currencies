@@ -36,10 +36,16 @@ class Calculation < ApplicationRecord
     Reports::CalculationRate.new(self).chart
   end
 
+  def reload_rates
+    update_attribute(:rates_data, nil) if rates_data.present?
+    update_rates
+  end
+
   private
 
   def target_and_base_not_eq
-    errors.add(:target_currency, "can't be eq base currency") unless
+    message = "target currency can't equals base currency"
+    errors.add(:target_currency, message) unless
         base_currency != target_currency
   end
 

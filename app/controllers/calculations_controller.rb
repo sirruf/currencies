@@ -4,7 +4,7 @@
 # Calculations
 #
 class CalculationsController < ApplicationController
-  before_action :set_calculation, only: %i[show edit update destroy]
+  before_action :set_calculation, only: %i[show edit update destroy reload]
   before_action :authenticate_user!
 
   add_breadcrumb 'Home', :root_path
@@ -16,8 +16,6 @@ class CalculationsController < ApplicationController
 
   def show
     add_breadcrumb @calculation.id, nil
-    error = 'Rates are updating. Please, reload this page in minutes.'
-    flash[:alert] = error unless @calculation.data_ready?
   end
 
   def new
@@ -30,7 +28,7 @@ class CalculationsController < ApplicationController
     @calculation = Calculation.new(calculation_params)
     @calculation.user = current_user
     if @calculation.save
-      redirect_to calculations_path(@calculation),
+      redirect_to calculation_path(@calculation),
                   notice: 'Calculation was successfully created.'
     else
       render action: 'new'
@@ -45,6 +43,7 @@ class CalculationsController < ApplicationController
   def update
     add_breadcrumb @calculation.id, calculation_path(@calculation)
     add_breadcrumb 'Edit', calculation_path(@calculation)
+    @calculation.rates_data = nil
     if @calculation.update(calculation_params)
       redirect_to calculation_path(@calculation),
                   notice: 'Calculation was successfully updated.'
@@ -56,6 +55,12 @@ class CalculationsController < ApplicationController
   def destroy
     @calculation.destroy
     redirect_to calculations_path
+  end
+
+  def reload
+    @calculation.reload_rates
+    flash[:warning] = 'Rates data updating started.'
+    redirect_to calculation_path(@calculation)
   end
 
   private

@@ -16,6 +16,7 @@
             <th scope="col">Weeks</th>
             <th scope="col">Amount</th>
             <th scope="col"></th>
+            <th scope="col"></th>
           </tr>
           </thead>
           <tbody>
@@ -34,6 +35,12 @@
               </td>
               <td>
                 <span class="badge badge-success"><%= calculation.amount %></span>
+              </td>
+              <td>
+                <% unless calculation.data_ready? %>
+                  <span class="badge badge-warning">Updating rates</span>
+                <% end %>
+
               </td>
               <td>
                 <div class="btn-group" role="group" aria-label="Actions">

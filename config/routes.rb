@@ -3,5 +3,7 @@
 Rails.application.routes.draw do
   devise_for :users
   root 'static_pages#home'
-  resources :calculations
+  resources :calculations do
+    post 'reload', action: :reload, on: :member
+  end
 end

@@ -25,13 +25,25 @@ module Fixer
     def get_rates(past_dates, future_dates, with_past = false)
       all_rates = {}
       past_dates.each_with_index do |date, index|
-        value = API.value_for_date(@base, @target, date)
+        # value = API.value_for_date(@base, @target, date)
+        value = rate_by_date(date)
         unless value.nil?
           all_rates[date.to_s] = value if with_past
           all_rates[future_dates[future_dates.size - index - 1].to_s] = value
         end
       end
       all_rates.sort.to_h
+    end
+
+    def rate_by_date(date)
+      rate = Rate.find_by(base: @base, target: @target, rate_date: date)
+      if rate.present?
+        rate.value
+      else
+        value = API.value_for_date(@base, @target, date)
+        Rate.create(base: @base, target: @target, rate_date: date, value: value)
+        value
+      end
     end
   end
 end
