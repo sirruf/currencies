@@ -23,5 +23,4 @@ describe Reports::CalculationRateItem do
       expect(items).to all(be_an(Reports::CalculationRateItem))
     end
   end
-
 end

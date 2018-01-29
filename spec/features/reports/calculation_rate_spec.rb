@@ -18,10 +18,11 @@ describe Reports::CalculationRate do
 
   describe 'rates and chart data' do
     it 'returns correct rates' do
-      expect(calculation_rate.rates.map(&:value)).to eq(test_rates_values_with_today)
+      expect(calculation_rate.rates.map(&:value)).to eq(test_rates_values)
     end
     it 'returns correct chart data' do
-      expect(calculation_rate.chart).to eq([test_chart_data_profit, test_chart_data_rate])
+      test_cart = [test_chart_data_profit, test_chart_data_rate]
+      expect(calculation_rate.chart).to eq(test_cart)
     end
   end
 end

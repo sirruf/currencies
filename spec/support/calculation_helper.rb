@@ -18,7 +18,7 @@ def test_calculation
                   updating_by_job: true)
 end
 
-def test_rates_values_with_today
+def test_rates_values
   [test_calculation.rate_on_create] + test_rates.values
 end
 

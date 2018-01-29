@@ -8,8 +8,9 @@ describe Fixer::API::Request do
     VCR.use_cassette('eur_to_usd_conversion_for_date') do
       date = Date.strptime('2009-31-05', '%Y-%d-%m').to_s
       response = Fixer::API::Request.get(date, base: 'EUR', symbols: 'USD')
+      test_rate = '{"base":"EUR","date":"2009-05-29","rates":{"USD":1.4098}}'
       expect(response.code).to eq('200')
-      expect(response.body).to eq('{"base":"EUR","date":"2009-05-29","rates":{"USD":1.4098}}')
+      expect(response.body).to eq(test_rate)
     end
   end
   it 'returns rate for date with incorrect date' do
