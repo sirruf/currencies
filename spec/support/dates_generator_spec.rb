@@ -20,11 +20,6 @@ describe DatesGenerator do
       { day_of_week })
   end
 
-  it 'returns past dates range' do
-    days = default_generator.dates_for(number_of_weeks, past: true)
-    expect(days.map(&:past?)).not_to include(false)
-  end
-
   it 'returns feature dates range' do
     days = default_generator.dates_for(number_of_weeks)
     expect(days.map(&:past?)).not_to include(true)
