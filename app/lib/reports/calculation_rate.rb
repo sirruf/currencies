@@ -33,7 +33,7 @@ module Reports
                        ])
     end
 
-    # private
+    private
 
     def build_chart_data(lines = [])
       rates.each do |item|

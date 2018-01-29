@@ -3,5 +3,8 @@
 require 'rails_helper'
 
 describe Calculation, type: :model do
-  # pending "add some examples to (or delete) #{__FILE__}"
+  let!(:user) { create(:user, email: 'bob@example.com', password: 'qweqweqwe') }
+  before(:each) do
+    login('bob@mail.ru', 'qweqweqwe')
+  end
 end

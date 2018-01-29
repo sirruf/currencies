@@ -14,13 +14,15 @@ module Fixer
       @rates_values = {}
     end
 
-    def rates(number_of_weeks)
-      weeks = number_of_weeks <= MAX_WEEKS ? number_of_weeks : MAX_WEEKS
+    def rates(weeks)
+      wks = weeks.to_i <= MAX_WEEKS ? weeks.to_i : MAX_WEEKS
       generator = DatesGenerator.new(wday_number: 1)
-      past_dates = generator.dates_for(weeks, past: true)
-      future_dates = generator.dates_for(weeks)
+      past_dates = generator.dates_for(wks, past: true)
+      future_dates = generator.dates_for(wks)
       @rates_values = get_rates(past_dates, future_dates)
     end
+
+    private
 
     def get_rates(past_dates, future_dates, with_past = false)
       all_rates = {}

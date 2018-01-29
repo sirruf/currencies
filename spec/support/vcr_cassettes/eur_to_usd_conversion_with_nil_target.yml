@@ -1,0 +1,44 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.fixer.io/2009-05-31?base=EUR
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.13.8
+      Date:
+      - Sun, 28 Jan 2018 19:20:51 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '470'
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - public, must-revalidate, max-age=900
+      Last-Modified:
+      - Fri, 29 May 2009 00:00:00 GMT
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+    body:
+      encoding: UTF-8
+      string: '{"base":"EUR","date":"2009-05-29","rates":{"AUD":1.7671,"BGN":1.9558,"BRL":2.832,"CAD":1.5501,"CHF":1.5128,"CNY":9.6263,"CZK":26.825,"DKK":7.4453,"EEK":15.647,"GBP":0.8729,"HKD":10.927,"HRK":7.35,"HUF":282.48,"IDR":14539.0,"INR":66.426,"JPY":135.22,"KRW":1764.0,"LTL":3.4528,"LVL":0.7093,"MXN":18.434,"MYR":4.9167,"NOK":8.8785,"NZD":2.2135,"PHP":66.516,"PLN":4.4762,"RON":4.1825,"RUB":43.446,"SEK":10.668,"SGD":2.035,"THB":48.377,"TRY":2.1737,"USD":1.4098,"ZAR":11.241}}'
+    http_version: 
+  recorded_at: Sun, 28 Jan 2018 19:20:51 GMT
+recorded_with: VCR 4.0.0

@@ -3,5 +3,18 @@
 require 'rails_helper'
 
 RSpec.describe CurrenciesUpdateJob, type: :job do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#perform_later' do
+    it 'updates calculation rates' do
+      user = User.create(email: 'test@example.com', password: '12345678')
+      c = Calculation.new(base_currency: 'EUR',
+                          target_currency: 'USD',
+                          amount: 10_000,
+                          max_weeks: 5,
+                          user: user)
+      ActiveJob::Base.queue_adapter = :test
+      expect do
+        CurrenciesUpdateJob.perform_later(c.id)
+      end.to have_enqueued_job
+    end
+  end
 end

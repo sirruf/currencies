@@ -123,4 +123,45 @@ http_interactions:
       string: '{"base":"EUR","date":"2018-01-22","rates":{}}'
     http_version: 
   recorded_at: Tue, 23 Jan 2018 18:31:34 GMT
+- request:
+    method: get
+    uri: https://api.fixer.io/2018-01-29?base=EUR&symbols=RUR
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.13.8
+      Date:
+      - Mon, 29 Jan 2018 18:59:14 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '45'
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - public, must-revalidate, max-age=900
+      Last-Modified:
+      - Mon, 29 Jan 2018 00:00:00 GMT
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+    body:
+      encoding: UTF-8
+      string: '{"base":"EUR","date":"2018-01-29","rates":{}}'
+    http_version: 
+  recorded_at: Mon, 29 Jan 2018 18:59:15 GMT
 recorded_with: VCR 4.0.0

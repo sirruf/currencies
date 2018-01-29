@@ -13,7 +13,7 @@ class DatesGenerator
     start_date = start_date(number_of_weeks)
     end_date = end_date(number_of_weeks)
     (start_date..end_date).to_a.select \
-          { |k| k.wday == @day_number }
+          { |k| k.wday == @day_number && k != Date.today }
   end
 
   private

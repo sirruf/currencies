@@ -10,7 +10,7 @@ module Fixer
 
       class << self
         def get(url, params = {})
-          uri = URI.parse(API::BASE_URL + url)
+          uri = URI.parse(API::BASE_URL + url.to_s)
           http = Net::HTTP.new(uri.host, uri.port)
           http.use_ssl = true
           uri.query = URI.encode_www_form(params)

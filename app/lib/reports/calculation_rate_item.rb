@@ -8,7 +8,7 @@ module Reports
     attr_reader :date, :value, :amount, :max_value, :min_value
 
     def self.from_calculation(rate)
-      items = [new(rate, rate.calculation.created_at)]
+      items = [new(rate, rate.calculation.created_at.to_date)]
       rate.calculation.rates_data.each_key do |d|
         date = Date.parse(d)
         items << new(rate, date)
@@ -24,7 +24,7 @@ module Reports
     end
 
     def year
-      @date.year
+      @date.to_date.year
     end
 
     def week
@@ -32,7 +32,7 @@ module Reports
     end
 
     def in_past?
-      @date.past?
+      @date.to_date.past?
     end
 
     def sum
