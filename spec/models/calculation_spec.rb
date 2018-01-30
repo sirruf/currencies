@@ -48,7 +48,8 @@ describe Calculation, type: :model do
       expect(rates.map(&:value)).to eq(test_rates_values)
     end
     it 'returns correct rates_chart' do
-      expect(calculation.rates_chart).to eq([test_chart_data_profit, test_chart_data_rate])
+      expect(calculation.rates_chart).to eq([test_chart_data_profit,
+                                             test_chart_data_rate])
     end
   end
 end

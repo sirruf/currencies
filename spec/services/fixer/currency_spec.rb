@@ -23,12 +23,24 @@ describe Fixer::Currency do
       expect(rates.values.size).to eq(0)
     end
   end
+end
+describe Fixer::Currency do
+  include_context 'shared test currency'
+  include_context 'shared vcr options'
   it 'returns empty hash if number of weeks is incorrect' do
     VCR.use_cassette('eur_to_rur_conversion_incorrect_weeks', vcr_options) do
       rates = currency.rates(-1)
       expect(rates.size).to eq(0)
       expect(rates.keys).to eq([])
       expect(rates.values.size).to eq(0)
+    end
+  end
+  it 'saves rates to Rate model' do
+    VCR.use_cassette('eur_to_gbp_conversion', vcr_options) do
+      c = Fixer::Currency.new('GBP')
+      rates = c.rates(number_of_weeks)
+      rates_in_cache = Rate.where(value: rates.values)
+      expect(rates_in_cache.count).to eq(number_of_weeks)
     end
   end
 end
