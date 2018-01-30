@@ -13,7 +13,7 @@ class Calculation < ApplicationRecord
                                      less_than_or_equal_to: 100_000 }
   validates :max_weeks, numericality: { only_integer: true,
                                         greater_than_or_equal_to: 1,
-                                        less_than_or_equal_to: 25 }
+                                        less_than_or_equal_to: 250 }
   validates :base_currency, :target_currency,
             inclusion: { in: Fixer::API::ALLOWED_CURRENCIES }
   validate :target_and_base_not_eq

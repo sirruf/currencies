@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require 'support/calculation_helper'
+require 'support/shared/calculation_shared'
 
 describe Reports::CalculationRateItem do
+  include_context 'shared test rates'
+  include_context 'shared test calculation'
   let(:rates_data) { test_rates }
   let(:calculation) { test_calculation }
   let(:calculation_rate) { Reports::CalculationRate.new(calculation) }

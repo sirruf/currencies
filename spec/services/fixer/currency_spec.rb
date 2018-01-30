@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require 'support/currency_helper'
+require 'support/shared/currency_shared'
 
 describe Fixer::Currency do
+  include_context 'shared test currency'
+  include_context 'shared vcr options'
   it 'returns rates if symbol is correct' do
     VCR.use_cassette('eur_to_usd_conversion', vcr_options) do
       expect(rates.size).to eq(dates.size)
