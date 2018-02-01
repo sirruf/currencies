@@ -9,6 +9,7 @@ module Reports
 
     def self.from_calculation(rate)
       items = [new(rate, rate.calculation.created_at.to_date)]
+      return [items] unless rate.calculation.rates_data.present?
       rate.calculation.rates_data.each_key do |d|
         date = Date.parse(d)
         items << new(rate, date)
@@ -20,7 +21,7 @@ module Reports
       @rate = rate
       @date = date
       @amount = rate.calculation.amount || 0
-      set_values(date, rate)
+      set_values
     end
 
     def year
@@ -45,11 +46,27 @@ module Reports
 
     private
 
-    def set_values(date, rate)
-      @rate_on_create = rate.calculation.rate_on_create || 1
-      @value = rate.calculation.rates_data[date.to_s] || @rate_on_create
-      @max_value = rate.max_value[1] == @value
-      @min_value = rate.min_value[1] == @value
+    def set_values
+      @rate_on_create = @rate.calculation.rate_on_create || 1
+      @max_value = max_value?
+      @min_value = min_value?
+      @value = value_for(@date, @rate)
+    end
+
+    def value_for(date, rate)
+      @value = if rate.calculation.rates_data.present?
+                 rate.calculation.rates_data[date.to_s] || @rate_on_create
+               else
+                 @rate_on_create
+               end
+    end
+
+    def max_value?
+      @rate.max_value && @rate.max_value[1] == @value
+    end
+
+    def min_value?
+      @rate.min_value && @rate.min_value[1] == @value
     end
   end
 end

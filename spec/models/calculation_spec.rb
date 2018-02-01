@@ -33,23 +33,26 @@ end
 describe Calculation, type: :model do
   context 'public methods' do
     include_context 'shared test rates'
-    include_context 'shared test calculation'
     include_context 'shared test charts'
 
+    let(:user) { create(:user) }
     let(:rates_data) { test_rates }
-    let(:calculation) { test_calculation }
-    let(:calculation_wo_rates) { test_calculation_wo_rates }
+    let(:calc) do
+      create(:calculation, user: user, rates_data: rates_data)
+    end
+    let(:rates_values) { [calc.rate_on_create] + rates_data.values }
+    let(:calc_wo_rates) { create(:calculation, user: user) }
     it 'returns correct data_ready' do
-      expect(calculation.data_ready?).to eq(true)
-      expect(calculation_wo_rates.data_ready?).to eq(false)
+      expect(calc.data_ready?).to eq(true)
+      expect(calc_wo_rates.data_ready?).to eq(false)
     end
     it 'returns correct rates_report' do
-      rates = calculation.rates_report
-      expect(rates.map(&:value)).to eq(test_rates_values)
+      rates = calc.rates_report
+      expect(rates.map(&:value)).to eq(rates_values)
     end
     it 'returns correct rates_chart' do
-      expect(calculation.rates_chart).to eq([test_chart_data_profit,
-                                             test_chart_data_rate])
+      expect(calc.rates_chart).to eq([test_chart_data_profit,
+                                      test_chart_data_rate])
     end
   end
 end

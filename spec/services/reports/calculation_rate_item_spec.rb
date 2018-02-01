@@ -5,16 +5,17 @@ require 'support/shared/calculation_shared'
 
 describe Reports::CalculationRateItem do
   include_context 'shared test rates'
-  include_context 'shared test calculation'
   let(:rates_data) { test_rates }
-  let(:calculation) { test_calculation }
-  let(:calculation_rate) { Reports::CalculationRate.new(calculation) }
+  let(:calc) do
+    create(:calculation, user: create(:user), rates_data: rates_data)
+  end
+  let(:calc_rate) { Reports::CalculationRate.new(calc) }
   let(:date) { Date.parse(rates_data.keys.sample) }
-  let(:calculation_rate_item) do
-    Reports::CalculationRateItem.new(calculation_rate, date.to_s)
+  let(:calc_rate_item) do
+    Reports::CalculationRateItem.new(calc_rate, date.to_s)
   end
   let(:items) do
-    Reports::CalculationRateItem.from_calculation(calculation_rate)
+    Reports::CalculationRateItem.from_calculation(calc_rate)
   end
 
   describe 'rate items' do

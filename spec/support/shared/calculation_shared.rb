@@ -10,31 +10,6 @@ shared_context 'shared test rates' do
       '2018-02-19' => 1.1993,
       '2018-02-26' => 1.1853 }
   end
-
-  let(:test_rates_values) do
-    [test_calculation.rate_on_create] + test_rates.values
-  end
-end
-
-shared_context 'shared test calculation' do
-  let(:test_calculation) do
-    Calculation.new(base_currency: 'EUR',
-                    target_currency: 'USD',
-                    amount: 17_000, max_weeks: 5,
-                    rates_data: rates_data,
-                    created_at: '2018-01-28 17:53:30',
-                    rate_on_create: 1.2436,
-                    updating_by_job: true)
-  end
-  let(:test_calculation_wo_rates) do
-    Calculation.new(base_currency: 'EUR',
-                    target_currency: 'USD',
-                    amount: 17_000, max_weeks: 5,
-                    rates_data: nil,
-                    created_at: '2018-01-28 17:53:30',
-                    rate_on_create: 1.2436,
-                    updating_by_job: true)
-  end
 end
 
 shared_context 'shared test charts' do
