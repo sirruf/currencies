@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe CurrenciesUpdateJob, type: :job do
   describe '#perform_later' do
     it 'updates calculation rates' do
-      user = User.create(email: 'test@example.com', password: '12345678')
+      user = create(:user)
       c = Calculation.new(base_currency: 'EUR',
                           target_currency: 'USD',
                           amount: 10_000,

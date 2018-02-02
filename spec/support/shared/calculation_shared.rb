@@ -30,3 +30,12 @@ shared_context 'shared test charts' do
                             '2018-02-26' => 1.1853 } }
   end
 end
+
+shared_context 'shared calculation params' do
+  let(:calc_params) do
+    { calculation: { base_currency: 'EUR',
+                     target_currency: 'USD',
+                     amount: 10_000,
+                     max_weeks: 5 } }
+  end
+end

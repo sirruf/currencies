@@ -4,8 +4,8 @@
 # Calculations
 #
 class CalculationsController < ApplicationController
-  before_action :set_calculation, only: %i[show edit update destroy reload]
   before_action :authenticate_user!
+  before_action :set_calculation, only: %i[show edit update destroy reload]
 
   add_breadcrumb 'Home', :root_path
   add_breadcrumb 'Calculations', :calculations_path
@@ -67,6 +67,8 @@ class CalculationsController < ApplicationController
 
   def set_calculation
     @calculation = current_user.calculations.find(params[:id])
+  rescue NoMethodError
+    raise ActiveRecord::RecordNotFound
   end
 
   def calculation_params
