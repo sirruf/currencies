@@ -4,6 +4,11 @@
 #  Exchange Calculations
 #
 class Calculation < ApplicationRecord
+  attr_accessor :updating_by_job
+  after_commit :update_rates
+
+  belongs_to :user
+
   validates :base_currency,
             :target_currency,
             :amount,
@@ -17,12 +22,6 @@ class Calculation < ApplicationRecord
   validates :base_currency, :target_currency,
             inclusion: { in: Fixer::API::ALLOWED_CURRENCIES }
   validate :target_and_base_not_eq
-
-  attr_accessor :updating_by_job
-
-  after_commit :update_rates
-
-  belongs_to :user
 
   def data_ready?
     rates_data.present?
