@@ -1,24 +1,9 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Welcome to Currencies App
+This app can help you get a forecast of currencies rates.
 
-Things you may want to cover:
+IMPORTANT! This is sample app. Don't use rates from it in your real life. :)
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Demo:
+https://glacial-scrubland-87473.herokuapp.com
